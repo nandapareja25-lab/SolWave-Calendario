@@ -2,18 +2,22 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 export function middleware(request: NextRequest) {
-  const session = request.cookies.get('sw_session')
-  const isAuthenticated = session?.value === 'authenticated'
-  const isLoginPage = request.nextUrl.pathname === '/login'
-  const isApiAuth = request.nextUrl.pathname.startsWith('/api/auth')
-  const isApiSeed = request.nextUrl.pathname === '/api/seed'
+  const { pathname } = request.nextUrl
 
-  if (!isAuthenticated && !isLoginPage && !isApiAuth && !isApiSeed) {
-    return NextResponse.redirect(new URL('/login', request.url))
+  if (
+    pathname.startsWith('/api/') ||
+    pathname.startsWith('/_next/') ||
+    pathname === '/login' ||
+    pathname === '/favicon.ico'
+  ) {
+    return NextResponse.next()
   }
 
-  if (isAuthenticated && isLoginPage) {
-    return NextResponse.redirect(new URL('/', request.url))
+  const session = request.cookies.get('sw_session')
+  if (session?.value !== 'authenticated') {
+    const loginUrl = request.nextUrl.clone()
+    loginUrl.pathname = '/login'
+    return NextResponse.redirect(loginUrl)
   }
 
   return NextResponse.next()
