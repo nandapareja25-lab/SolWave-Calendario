@@ -52,7 +52,7 @@ export default async function DashboardPage() {
 
   const albumProgress = albums.map((album) => {
     const albumSongs = songStatuses.filter((s) => s.song.album_id === album.id)
-    const pub = albumSongs.filter((s) => s.status === 'published' || s.status === 'complete').length
+    const pub = albumSongs.filter((s) => s.status === 'published').length
     return { album, pub, total: albumSongs.length, pct: albumSongs.length > 0 ? (pub / albumSongs.length) * 100 : 0 }
   })
   const mostAdvanced = albumProgress.sort((a, b) => b.pct - a.pct)[0]

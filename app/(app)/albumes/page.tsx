@@ -46,7 +46,7 @@ export default async function AlbumesPage() {
           const albumSongs = songs.filter((s) => s.album_id === album.id)
           const published = albumSongs.filter((s) => {
             const st = getSongStatus(stepsMap.get(s.id) ?? [])
-            return st === 'published' || st === 'complete'
+            return st === 'published'
           }).length
           const pct = albumSongs.length > 0 ? (published / albumSongs.length) * 100 : 0
           const albumStatus = getAlbumStatus(album)
@@ -55,7 +55,7 @@ export default async function AlbumesPage() {
             .sort((a, b) => (a.track_number ?? 0) - (b.track_number ?? 0))
             .find((s) => {
               const st = getSongStatus(stepsMap.get(s.id) ?? [])
-              return st !== 'published' && st !== 'complete'
+              return st !== 'published'
             })
 
           return (

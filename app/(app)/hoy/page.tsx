@@ -41,7 +41,7 @@ export default async function HoyPage() {
   const atrasadas = allSongs.filter((s) => {
     if (!s.scheduled_date || s.scheduled_date >= today) return false
     const status = getSongStatus(stepsMap.get(s.id) ?? [])
-    return status !== 'published' && status !== 'complete'
+    return status !== 'published'
   })
 
   const albumMap = new Map(albums.map((a) => [a.id, a]))

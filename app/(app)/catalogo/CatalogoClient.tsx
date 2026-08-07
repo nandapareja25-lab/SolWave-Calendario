@@ -119,7 +119,7 @@ export default function CatalogoClient({
           <div className="divide-y" style={{ borderColor: '#F0F0ED' }}>
             {filtered.map((song) => {
               const album = albumMap.get(song.album_id)
-              const past = song.scheduled_date && isPast(song.scheduled_date) && song.status !== 'published' && song.status !== 'complete'
+              const past = song.scheduled_date && isPast(song.scheduled_date) && song.status !== 'published'
 
               return (
                 <Link
