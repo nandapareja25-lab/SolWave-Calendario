@@ -3,7 +3,7 @@ import Anthropic from '@anthropic-ai/sdk'
 import { supabase } from '@/lib/supabase'
 import { suggestPublicationDate } from '@/lib/calendar-algorithm'
 import { STEP_ORDER } from '@/lib/supabase'
-import youtubeCalendar from '@/scripts/youtube-calendar.json'
+import youtubeCalendar from '@/scripts/yt-calendar-2026.json'
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
@@ -173,15 +173,14 @@ async function runTool(name: string, input: Record<string, unknown>): Promise<st
   if (name === 'get_youtube_calendar') {
     const summary = {
       strategy: youtubeCalendar.strategy,
-      albums: youtubeCalendar.albums,
-      adaptive_slots: youtubeCalendar.weeks
-        .flatMap(w => w.entries)
-        .filter((e): e is typeof e & { adaptive: boolean } => 'adaptive' in e && e.adaptive === true)
-        .map(e => ({ date: e.date, criteria: 'criteria' in e ? e.criteria : undefined })),
-      upcoming_fixed: youtubeCalendar.weeks
-        .flatMap(w => w.entries.map(e => ({ ...e, week: w.week })))
-        .filter(e => !('adaptive' in e && e.adaptive))
-        .slice(0, 15),
+      version: youtubeCalendar.version,
+      total_days: youtubeCalendar.days.length,
+      slots_per_day: youtubeCalendar.slots,
+      upcoming: youtubeCalendar.days.slice(0, 10).map(d => ({
+        date: d.date,
+        label: d.label,
+        slots: d.slots,
+      })),
     }
     return JSON.stringify(summary)
   }
@@ -195,18 +194,17 @@ async function runTool(name: string, input: Record<string, unknown>): Promise<st
     }
 
     // Check what's already in calendar for this genre
-    const genreInCalendar = youtubeCalendar.weeks
-      .flatMap(w => w.entries)
-      .filter(e => e.genre === genre && !('adaptive' in e && e.adaptive))
-      .map(e => e.title)
+    const genreInCalendar = youtubeCalendar.days
+      .flatMap(d => Object.values(d.slots))
+      .filter(s => s.genre === genre)
+      .map(s => s.title)
 
-    const adaptiveSlots = youtubeCalendar.weeks
-      .flatMap(w => w.entries)
-      .filter((e): e is typeof e & { adaptive: boolean } => 'adaptive' in e && e.adaptive === true)
-
-    // Find adaptive slots available (after today)
+    // In daily strategy, every slot is a potential slot (no adaptive distinction)
     const today = new Date().toISOString().split('T')[0]
-    const availableAdaptive = adaptiveSlots.filter(e => e.date >= today)
+    const availableDays = youtubeCalendar.days.filter(d => d.date >= today)
+    const availableAdaptive = availableDays.flatMap(d =>
+      Object.entries(d.slots).map(([slot, s]) => ({ date: d.date, slot, ...s }))
+    )
 
     // Strategy: 1-2 for Shorts, 1 candidate for complete, rest reserved
     const shortsCount = Math.min(2, Math.ceil(songs.length * 0.18))
