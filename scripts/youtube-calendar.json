@@ -1,0 +1,197 @@
+{
+  "version": "2.0",
+  "created": "2026-08-08",
+  "updated": "2026-08-08",
+  "validated": true,
+  "catalog_source": "87 canciones / 8 álbumes activos",
+  "strategy": {
+    "frequency": "2 canciones completas/semana + 3 Shorts/semana",
+    "schedule": {
+      "martes": "canción completa",
+      "jueves": "Short",
+      "viernes": "Short",
+      "sábado": "Short",
+      "domingo": "canción completa"
+    },
+    "totals": {
+      "fixed_complete": 19,
+      "adaptive_slots": 5,
+      "shorts": 36,
+      "pending_validation": 0
+    },
+    "principles": [
+      "No publicar otro álbum completo durante las 12 semanas (bachata ya publicado)",
+      "Shorts = laboratorio de descubrimiento (pueden usar canciones no publicadas completas)",
+      "Canciones completas = adquisición y crecimiento del canal",
+      "Solwave = catálogo completo + experiencia premium",
+      "Rotación de géneros: nunca 2-3 semanas seguidas del mismo álbum",
+      "Semanas 8-12 incluyen slots adaptativos según Analytics",
+      "Agregar álbum nuevo ≠ publicar ese álbum completo en YouTube"
+    ],
+    "analytics_metrics": ["vistas", "retención/duración media", "CTR", "nuevos espectadores", "suscriptores generados"],
+    "status_types": ["publicada_completa", "programada_youtube", "probando_shorts", "reservada_solwave"],
+    "new_music_protocol": [
+      "1. Agregar al inventario general (Supabase)",
+      "2. Identificar género, álbum y territorio emocional",
+      "3. Revisar calendario vigente y publicaciones existentes",
+      "4. Determinar si aporta variedad o cubre territorio no probado",
+      "5. Decidir cuáles probar primero via Shorts",
+      "6. Seleccionar solo algunas como candidatas a video completo",
+      "7. Mantener el resto reservado para Solwave",
+      "8. Si merece entrar al calendario, acomodar estratégicamente sin destruir publicaciones fijas",
+      "9. Usar slots adaptativos futuros ANTES de desplazar publicaciones existentes",
+      "10. Considerar datos YouTube para reforzar géneros ganadores"
+    ]
+  },
+  "albums": [
+    { "name": "Llegaste muy tarde", "genre": "Bachata", "songs": 11, "status": "publicado_completo_youtube" },
+    { "name": "Ya no vuelvo atrás", "genre": "Dancehall", "songs": 11, "status": "activo" },
+    { "name": "Las pequeñas cosas", "genre": "Indie Folk", "songs": 11, "status": "activo" },
+    { "name": "Volví a escucharme", "genre": "Pop Soul", "songs": 11, "status": "activo" },
+    { "name": "Desde que llegaste", "genre": "Regional romántico", "songs": 11, "status": "activo" },
+    { "name": "Vuelvo a sentir la vida", "genre": "Salsa", "songs": 10, "status": "activo" },
+    { "name": "Hoy Empieza Algo Bueno", "genre": "Cumbia argentina", "songs": 11, "status": "activo" },
+    { "name": "Pop Soul/Balada", "genre": "Pop Soul/Balada", "songs": 11, "status": "activo" },
+    { "name": "Donde Florece el Alma", "genre": "Folk/Flamenco", "songs": null, "status": "pendiente_de_cargar" }
+  ],
+  "weeks": [
+    {
+      "week": 1,
+      "dates": "8–14 ago 2026",
+      "entries": [
+        { "date": "2026-08-08", "day": "Sáb", "type": "Short", "title": "Ahora Me Buscas", "album": "Llegaste muy tarde", "genre": "Bachata", "status": "programada_youtube", "note": "Aprovecha álbum completo ya publicado" },
+        { "date": "2026-08-09", "day": "Dom", "type": "Completa", "title": "Vuelvo a Sentir la Vida", "album": "Vuelvo a sentir la vida", "genre": "Salsa", "status": "programada_youtube" },
+        { "date": "2026-08-11", "day": "Mar", "type": "Completa", "title": "Hoy Empieza Algo Bueno", "album": "Hoy Empieza Algo Bueno", "genre": "Cumbia argentina", "status": "programada_youtube" },
+        { "date": "2026-08-13", "day": "Jue", "type": "Short", "title": "Vuelvo a Sentir la Vida", "album": "Vuelvo a sentir la vida", "genre": "Salsa", "status": "programada_youtube" },
+        { "date": "2026-08-14", "day": "Vie", "type": "Short", "title": "Hoy Empieza Algo Bueno", "album": "Hoy Empieza Algo Bueno", "genre": "Cumbia argentina", "status": "programada_youtube" },
+        { "date": "2026-08-15", "day": "Sáb", "type": "Short", "title": "Ya No Vuelvo Atrás", "album": "Ya no vuelvo atrás", "genre": "Dancehall", "status": "programada_youtube", "note": "Teaser" }
+      ]
+    },
+    {
+      "week": 2,
+      "dates": "16–22 ago 2026",
+      "entries": [
+        { "date": "2026-08-16", "day": "Dom", "type": "Completa", "title": "Ya No Vuelvo Atrás", "album": "Ya no vuelvo atrás", "genre": "Dancehall", "status": "programada_youtube" },
+        { "date": "2026-08-18", "day": "Mar", "type": "Completa", "title": "Las Pequeñas Cosas", "album": "Las pequeñas cosas", "genre": "Indie Folk", "status": "programada_youtube" },
+        { "date": "2026-08-20", "day": "Jue", "type": "Short", "title": "El Café de las Ocho", "album": "Las pequeñas cosas", "genre": "Indie Folk", "status": "programada_youtube" },
+        { "date": "2026-08-21", "day": "Vie", "type": "Short", "title": "Me Elegí Primero", "album": "Ya no vuelvo atrás", "genre": "Dancehall", "status": "programada_youtube" },
+        { "date": "2026-08-22", "day": "Sáb", "type": "Short", "title": "Me Debía Esta Canción", "album": "Volví a escucharme", "genre": "Pop Soul", "status": "programada_youtube" }
+      ]
+    },
+    {
+      "week": 3,
+      "dates": "23–29 ago 2026",
+      "entries": [
+        { "date": "2026-08-23", "day": "Dom", "type": "Completa", "title": "Me Debía Esta Canción", "album": "Volví a escucharme", "genre": "Pop Soul", "status": "programada_youtube" },
+        { "date": "2026-08-25", "day": "Mar", "type": "Completa", "title": "Desde Que Llegaste", "album": "Desde que llegaste", "genre": "Regional romántico", "status": "programada_youtube" },
+        { "date": "2026-08-27", "day": "Jue", "type": "Short", "title": "Qué Suerte Encontrarte", "album": "Desde que llegaste", "genre": "Regional romántico", "status": "programada_youtube" },
+        { "date": "2026-08-28", "day": "Vie", "type": "Short", "title": "Siempre Vuelvo a Mí", "album": "Volví a escucharme", "genre": "Pop Soul", "status": "programada_youtube" },
+        { "date": "2026-08-29", "day": "Sáb", "type": "Short", "title": "Esto Es Todo Lo Que Soy", "album": "Pop Soul/Balada", "genre": "Pop Soul/Balada", "status": "programada_youtube" }
+      ]
+    },
+    {
+      "week": 4,
+      "dates": "30 ago – 5 sep 2026",
+      "entries": [
+        { "date": "2026-08-30", "day": "Dom", "type": "Completa", "title": "Esto Es Todo Lo Que Soy", "album": "Pop Soul/Balada", "genre": "Pop Soul/Balada", "status": "programada_youtube" },
+        { "date": "2026-09-01", "day": "Mar", "type": "Completa", "title": "Hoy Me Despertó la Alegría", "album": "Vuelvo a sentir la vida", "genre": "Salsa", "status": "programada_youtube" },
+        { "date": "2026-09-03", "day": "Jue", "type": "Short", "title": "Baila Conmigo la Vida", "album": "Vuelvo a sentir la vida", "genre": "Salsa", "status": "programada_youtube" },
+        { "date": "2026-09-04", "day": "Vie", "type": "Short", "title": "Volvió a Gustarme la Vida", "album": "Hoy Empieza Algo Bueno", "genre": "Cumbia argentina", "status": "programada_youtube" },
+        { "date": "2026-09-05", "day": "Sáb", "type": "Short", "title": "Llegaste Muy Tarde", "album": "Llegaste muy tarde", "genre": "Bachata", "status": "programada_youtube" }
+      ]
+    },
+    {
+      "week": 5,
+      "dates": "6–12 sep 2026",
+      "entries": [
+        { "date": "2026-09-06", "day": "Dom", "type": "Completa", "title": "Volví a Escucharme", "album": "Volví a escucharme", "genre": "Pop Soul", "status": "programada_youtube" },
+        { "date": "2026-09-08", "day": "Mar", "type": "Completa", "title": "Sola Me Queda Bien", "album": "Ya no vuelvo atrás", "genre": "Dancehall", "status": "programada_youtube" },
+        { "date": "2026-09-10", "day": "Jue", "type": "Short", "title": "No Era Mi Culpa", "album": "Volví a escucharme", "genre": "Pop Soul", "status": "probando_shorts" },
+        { "date": "2026-09-11", "day": "Vie", "type": "Short", "title": "Esta Vez Me Hago Caso", "album": "Hoy Empieza Algo Bueno", "genre": "Cumbia argentina", "status": "probando_shorts" },
+        { "date": "2026-09-12", "day": "Sáb", "type": "Short", "title": "Tu Arrepentamiento", "album": "Llegaste muy tarde", "genre": "Bachata", "status": "probando_shorts" }
+      ]
+    },
+    {
+      "week": 6,
+      "dates": "13–19 sep 2026",
+      "entries": [
+        { "date": "2026-09-13", "day": "Dom", "type": "Completa", "title": "Esta Es la Última Llamada", "album": "Llegaste muy tarde", "genre": "Bachata", "status": "programada_youtube" },
+        { "date": "2026-09-15", "day": "Mar", "type": "Completa", "title": "Cada Paso Cuenta", "album": "Vuelvo a sentir la vida", "genre": "Salsa", "status": "programada_youtube" },
+        { "date": "2026-09-17", "day": "Jue", "type": "Short", "title": "La Luz de la Ventana", "album": "Las pequeñas cosas", "genre": "Indie Folk", "status": "probando_shorts" },
+        { "date": "2026-09-18", "day": "Vie", "type": "Short", "title": "Contigo Entendí", "album": "Desde que llegaste", "genre": "Regional romántico", "status": "probando_shorts" },
+        { "date": "2026-09-19", "day": "Sáb", "type": "Short", "title": "Sin Pedir Permiso", "album": "Ya no vuelvo atrás", "genre": "Dancehall", "status": "probando_shorts" }
+      ]
+    },
+    {
+      "week": 7,
+      "dates": "20–26 sep 2026",
+      "entries": [
+        { "date": "2026-09-20", "day": "Dom", "type": "Completa", "title": "Un Día Cualquiera", "album": "Las pequeñas cosas", "genre": "Indie Folk", "status": "programada_youtube" },
+        { "date": "2026-09-22", "day": "Mar", "type": "Completa", "title": "Eres Mi Calma", "album": "Desde que llegaste", "genre": "Regional romántico", "status": "programada_youtube" },
+        { "date": "2026-09-24", "day": "Jue", "type": "Short", "title": "Ya Salió el Sol", "album": "Vuelvo a sentir la vida", "genre": "Salsa", "status": "probando_shorts" },
+        { "date": "2026-09-25", "day": "Vie", "type": "Short", "title": "Ahora Sí Soy Yo", "album": "Volví a escucharme", "genre": "Pop Soul", "status": "probando_shorts" },
+        { "date": "2026-09-26", "day": "Sáb", "type": "Short", "title": "Qué Te Vaya Bonito", "album": "Llegaste muy tarde", "genre": "Bachata", "status": "probando_shorts" }
+      ]
+    },
+    {
+      "week": 8,
+      "dates": "27 sep – 3 oct 2026",
+      "note": "1 slot adaptativo según Analytics del mes 1",
+      "entries": [
+        { "date": "2026-09-27", "day": "Dom", "type": "Completa", "title": "ADAPTATIVO", "album": "Género ganador del mes 1", "genre": "TBD", "status": "programada_youtube", "adaptive": true, "criteria": "álbum/canción con mayor retención y nuevos suscriptores" },
+        { "date": "2026-09-29", "day": "Mar", "type": "Completa", "title": "La Vida Me Encontró", "album": "Vuelvo a sentir la vida", "genre": "Salsa", "status": "programada_youtube" },
+        { "date": "2026-10-01", "day": "Jue", "type": "Short", "title": "Libre de Ti", "album": "Ya no vuelvo atrás", "genre": "Dancehall", "status": "probando_shorts" },
+        { "date": "2026-10-02", "day": "Vie", "type": "Short", "title": "Sin Miedo a Sonreír", "album": "Vuelvo a sentir la vida", "genre": "Salsa", "status": "probando_shorts" },
+        { "date": "2026-10-03", "day": "Sáb", "type": "Short", "title": "ADAPTATIVO", "album": "Canción premiada", "genre": "TBD", "status": "programada_youtube", "adaptive": true, "criteria": "canción con mejor CTR en Shorts del mes 1" }
+      ]
+    },
+    {
+      "week": 9,
+      "dates": "4–10 oct 2026",
+      "note": "1 slot adaptativo por semana",
+      "entries": [
+        { "date": "2026-10-04", "day": "Dom", "type": "Completa", "title": "Más Fuerte que Ayer", "album": "Ya no vuelvo atrás", "genre": "Dancehall", "status": "programada_youtube" },
+        { "date": "2026-10-06", "day": "Mar", "type": "Completa", "title": "ADAPTATIVO", "album": "Género ganador", "genre": "TBD", "status": "programada_youtube", "adaptive": true },
+        { "date": "2026-10-08", "day": "Jue", "type": "Short", "title": "Me Aprendí Sin Ti", "album": "Llegaste muy tarde", "genre": "Bachata", "status": "probando_shorts" },
+        { "date": "2026-10-09", "day": "Vie", "type": "Short", "title": "Mi Lugar Favorito", "album": "Desde que llegaste", "genre": "Regional romántico", "status": "probando_shorts" },
+        { "date": "2026-10-10", "day": "Sáb", "type": "Short", "title": "Aunque Tenga Miedo", "album": "Hoy Empieza Algo Bueno", "genre": "Cumbia argentina", "status": "probando_shorts" }
+      ]
+    },
+    {
+      "week": 10,
+      "dates": "11–17 oct 2026",
+      "note": "1 slot adaptativo",
+      "entries": [
+        { "date": "2026-10-11", "day": "Dom", "type": "Completa", "title": "Nunca Fue Demasiado Tarde", "album": "Volví a escucharme", "genre": "Pop Soul", "status": "programada_youtube" },
+        { "date": "2026-10-13", "day": "Mar", "type": "Completa", "title": "ADAPTATIVO", "album": "Género ganador", "genre": "TBD", "status": "programada_youtube", "adaptive": true },
+        { "date": "2026-10-15", "day": "Jue", "type": "Short", "title": "Esta Soy Yo", "album": "Ya no vuelvo atrás", "genre": "Dancehall", "status": "probando_shorts" },
+        { "date": "2026-10-16", "day": "Vie", "type": "Short", "title": "Despacio", "album": "Las pequeñas cosas", "genre": "Indie Folk", "status": "probando_shorts" },
+        { "date": "2026-10-17", "day": "Sáb", "type": "Short", "title": "Después de Ti", "album": "Desde que llegaste", "genre": "Regional romántico", "status": "probando_shorts" }
+      ]
+    },
+    {
+      "week": 11,
+      "dates": "18–24 oct 2026",
+      "note": "1 slot adaptativo",
+      "entries": [
+        { "date": "2026-10-18", "day": "Dom", "type": "Completa", "title": "Toda la Vida", "album": "Desde que llegaste", "genre": "Regional romántico", "status": "programada_youtube" },
+        { "date": "2026-10-20", "day": "Mar", "type": "Completa", "title": "ADAPTATIVO", "album": "Género ganador", "genre": "TBD", "status": "programada_youtube", "adaptive": true },
+        { "date": "2026-10-22", "day": "Jue", "type": "Short", "title": "No Me Apagues", "album": "Ya no vuelvo atrás", "genre": "Dancehall", "status": "probando_shorts" },
+        { "date": "2026-10-23", "day": "Vie", "type": "Short", "title": "Siempre Sale el Sol", "album": "Hoy Empieza Algo Bueno", "genre": "Cumbia argentina", "status": "probando_shorts" },
+        { "date": "2026-10-24", "day": "Sáb", "type": "Short", "title": "Después de la Lluvia", "album": "Las pequeñas cosas", "genre": "Indie Folk", "status": "probando_shorts" }
+      ]
+    },
+    {
+      "week": 12,
+      "dates": "25–31 oct 2026",
+      "note": "1 slot adaptativo — cierre del primer ciclo",
+      "entries": [
+        { "date": "2026-10-25", "day": "Dom", "type": "Completa", "title": "¡Que Nadie Me Pare!", "album": "Vuelvo a sentir la vida", "genre": "Salsa", "status": "programada_youtube" },
+        { "date": "2026-10-27", "day": "Mar", "type": "Completa", "title": "ADAPTATIVO", "album": "Género ganador", "genre": "TBD", "status": "programada_youtube", "adaptive": true },
+        { "date": "2026-10-29", "day": "Jue", "type": "Short", "title": "La Calma También Canta", "album": "Las pequeñas cosas", "genre": "Indie Folk", "status": "probando_shorts" },
+        { "date": "2026-10-30", "day": "Vie", "type": "Short", "title": "Después del Miedo", "album": "Volví a escucharme", "genre": "Pop Soul", "status": "probando_shorts" },
+        { "date": "2026-10-31", "day": "Sáb", "type": "Short", "title": "Tú Ya No Decides", "album": "Ya no vuelvo atrás", "genre": "Dancehall", "status": "probando_shorts" }
+      ]
+    }
+  ]
+}

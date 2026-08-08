@@ -1,0 +1,187 @@
+<title>SolWave — Calendario YouTube 12 Semanas v2</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif; background: #FAFAF8; color: #1A1A1A; padding: 24px; }
+  h1 { font-size: 1.4rem; font-weight: 700; margin-bottom: 4px; }
+  .subtitle { color: #6B7280; font-size: 0.85rem; margin-bottom: 16px; }
+  .alert { background: #FFF4EC; border: 1px solid #F0C090; border-radius: 12px; padding: 12px 16px; margin-bottom: 20px; font-size: 0.8rem; color: #92400E; }
+  .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 24px; }
+  .stat { background: white; border-radius: 14px; padding: 14px; box-shadow: 0 1px 6px rgba(0,0,0,0.06); }
+  .stat-value { font-size: 1.7rem; font-weight: 700; }
+  .stat-label { font-size: 0.72rem; color: #6B7280; margin-top: 2px; }
+  .week { background: white; border-radius: 16px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 6px rgba(0,0,0,0.05); }
+  .week-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+  .week-num { background: #1A1A1A; color: white; border-radius: 8px; padding: 2px 10px; font-size: 0.75rem; font-weight: 700; }
+  .week-dates { font-size: 0.8rem; color: #6B7280; }
+  .week-note { font-size: 0.72rem; color: #B56A3A; background: #FFF4EC; border-radius: 6px; padding: 2px 8px; margin-left: auto; }
+  .entries { display: flex; flex-direction: column; gap: 5px; }
+  .entry { display: flex; align-items: center; gap: 8px; padding: 7px 10px; border-radius: 10px; }
+  .entry.completa { background: #F0F7FF; }
+  .entry.short { background: #F5F5F0; }
+  .entry.adaptativo { background: #FFF4EC; border: 1.5px dashed #F0C090; }
+  .entry.pending { background: #FEF3C7; border: 1px dashed #D97706; }
+  .entry-date { font-size: 0.7rem; color: #9CA3AF; width: 72px; flex-shrink: 0; }
+  .type-badge { font-size: 0.65rem; font-weight: 700; padding: 2px 7px; border-radius: 20px; flex-shrink: 0; }
+  .type-completa { background: #DBEAFE; color: #1D4ED8; }
+  .type-short { background: #E5E7EB; color: #374151; }
+  .type-adaptativo { background: #FDE68A; color: #92400E; }
+  .type-pending { background: #FDE68A; color: #92400E; }
+  .entry-title { font-size: 0.82rem; font-weight: 500; flex: 1; }
+  .entry-title.adaptive-title { color: #B56A3A; font-style: italic; }
+  .entry-title.pending-title { color: #D97706; font-style: italic; }
+  .genre-chip { font-size: 0.65rem; color: #1A1A1A; padding: 2px 7px; border-radius: 20px; flex-shrink: 0; font-weight: 500; }
+  .correction-badge { font-size: 0.62rem; color: #059669; background: #D1FAE5; padding: 1px 5px; border-radius: 4px; flex-shrink: 0; }
+  .legend { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 18px; font-size: 0.75rem; color: #6B7280; }
+  .legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 4px; }
+</style>
+
+<h1>SolWave · Calendario YouTube <span style="color:#6B7280;font-weight:400;font-size:1rem">v2 corregido</span></h1>
+<p class="subtitle">12 semanas · 8 ago → 31 oct 2026 · 2 canciones completas + 3 Shorts/semana</p>
+
+<div style="background:#D1FAE5;border:1px solid #6EE7B7;border-radius:12px;padding:12px 16px;margin-bottom:20px;font-size:0.8rem;color:#065F46">
+  ✅ Calendario validado — todos los títulos confirmados contra el catálogo real de 87 canciones / 8 álbumes.
+</div>
+
+<div class="summary-grid">
+  <div class="stat"><div class="stat-value" style="color:#1D4ED8">19</div><div class="stat-label">Completas fijas</div></div>
+  <div class="stat"><div class="stat-value" style="color:#92400E">5</div><div class="stat-label">Slots adaptativos</div></div>
+  <div class="stat"><div class="stat-value" style="color:#374151">36</div><div class="stat-label">Shorts</div></div>
+  <div class="stat"><div class="stat-value" style="color:#059669">0</div><div class="stat-label">Títulos por confirmar</div></div>
+  <div class="stat"><div class="stat-value" style="color:#059669">63+</div><div class="stat-label">Reservadas Solwave</div></div>
+</div>
+
+<div class="legend">
+  <span><span class="legend-dot" style="background:#DBEAFE;border:1px solid #1D4ED8"></span>Canción completa</span>
+  <span><span class="legend-dot" style="background:#E5E7EB;border:1px solid #374151"></span>Short</span>
+  <span><span class="legend-dot" style="background:#FDE68A;border:1px dashed #92400E"></span>Slot adaptativo</span>
+  <span><span class="legend-dot" style="background:#FEF3C7;border:1px dashed #D97706"></span>Título pendiente</span>
+  <span style="color:#059669">✔ = título corregido</span>
+</div>
+
+<div id="calendar"></div>
+
+<script>
+const G = {
+  'Bachata':'#F2A7A7','Salsa':'#86EFAC','Dancehall':'#93C5FD',
+  'Indie Folk':'#A7F3D0','Pop Soul':'#C4B5FD','Pop Soul/Balada':'#DDD6FE',
+  'Regional romántico':'#FCA5A5','Cumbia argentina':'#FCD34D','TBD':'#E5E7EB'
+};
+
+const weeks = [
+  { w:1, d:'8–14 ago 2026', entries:[
+    { date:'Sáb 8 ago',  t:'Short',    title:'Ahora Me Buscas',          alb:'Llegaste muy tarde',      g:'Bachata',          note:'Álbum completo ya publicado' },
+    { date:'Dom 9 ago',  t:'Completa', title:'Vuelvo a Sentir la Vida',  alb:'Vuelvo a sentir la vida', g:'Salsa' },
+    { date:'Mar 11 ago', t:'Completa', title:'Hoy Empieza Algo Bueno',   alb:'Hoy Empieza Algo Bueno',  g:'Cumbia argentina' },
+    { date:'Jue 13 ago', t:'Short',    title:'Vuelvo a Sentir la Vida',  alb:'Vuelvo a sentir la vida', g:'Salsa' },
+    { date:'Vie 14 ago', t:'Short',    title:'Hoy Empieza Algo Bueno',   alb:'Hoy Empieza Algo Bueno',  g:'Cumbia argentina' },
+    { date:'Sáb 15 ago', t:'Short',    title:'Ya No Vuelvo Atrás',       alb:'Ya no vuelvo atrás',      g:'Dancehall',        note:'Teaser' },
+  ]},
+  { w:2, d:'16–22 ago 2026', entries:[
+    { date:'Dom 16 ago', t:'Completa', title:'Ya No Vuelvo Atrás',       alb:'Ya no vuelvo atrás',      g:'Dancehall' },
+    { date:'Mar 18 ago', t:'Completa', title:'Las Pequeñas Cosas',       alb:'Las pequeñas cosas',      g:'Indie Folk' },
+    { date:'Jue 20 ago', t:'Short',    title:'El Café de las Ocho',      alb:'Las pequeñas cosas',      g:'Indie Folk',       fix:'corregido de "El Olor del Café"' },
+    { date:'Vie 21 ago', t:'Short',    title:'Me Elegí Primero',         alb:'Ya no vuelvo atrás',      g:'Dancehall' },
+    { date:'Sáb 22 ago', t:'Short',    title:'Me Debía Esta Canción',    alb:'Volví a escucharme',      g:'Pop Soul' },
+  ]},
+  { w:3, d:'23–29 ago 2026', entries:[
+    { date:'Dom 23 ago', t:'Completa', title:'Me Debía Esta Canción',    alb:'Volví a escucharme',      g:'Pop Soul' },
+    { date:'Mar 25 ago', t:'Completa', title:'Desde Que Llegaste',       alb:'Desde que llegaste',      g:'Regional romántico' },
+    { date:'Jue 27 ago', t:'Short',    title:'Qué Suerte Encontrarte',   alb:'Desde que llegaste',      g:'Regional romántico' },
+    { date:'Vie 28 ago', t:'Short',    title:'Siempre Vuelvo a Mí',      alb:'Volví a escucharme',      g:'Pop Soul',          fix:'álbum corregido → Volví a escucharme' },
+    { date:'Sáb 29 ago', t:'Short',    title:'Esto Es Todo Lo Que Soy',  alb:'Pop Soul/Balada',         g:'Pop Soul/Balada' },
+  ]},
+  { w:4, d:'30 ago – 5 sep 2026', entries:[
+    { date:'Dom 30 ago', t:'Completa', title:'Esto Es Todo Lo Que Soy',  alb:'Pop Soul/Balada',         g:'Pop Soul/Balada' },
+    { date:'Mar 1 sep',  t:'Completa', title:'Hoy Me Despertó la Alegría',alb:'Vuelvo a sentir la vida',g:'Salsa' },
+    { date:'Jue 3 sep',  t:'Short',    title:'Baila Conmigo la Vida',    alb:'Vuelvo a sentir la vida', g:'Salsa' },
+    { date:'Vie 4 sep',  t:'Short',    title:'Volvió a Gustarme la Vida',alb:'Hoy Empieza Algo Bueno',  g:'Cumbia argentina',  fix:'álbum corregido → Hoy Empieza Algo Bueno' },
+    { date:'Sáb 5 sep',  t:'Short',    title:'Llegaste Muy Tarde',       alb:'Llegaste muy tarde',      g:'Bachata' },
+  ]},
+  { w:5, d:'6–12 sep 2026', entries:[
+    { date:'Dom 6 sep',  t:'Completa', title:'Volví a Escucharme',       alb:'Volví a escucharme',      g:'Pop Soul' },
+    { date:'Mar 8 sep',  t:'Completa', title:'Sola Me Queda Bien',       alb:'Ya no vuelvo atrás',      g:'Dancehall' },
+    { date:'Jue 10 sep', t:'Short',    title:'No Era Mi Culpa',          alb:'Volví a escucharme',      g:'Pop Soul' },
+    { date:'Vie 11 sep', t:'Short',    title:'Esta Vez Me Hago Caso',    alb:'Hoy Empieza Algo Bueno',  g:'Cumbia argentina' },
+    { date:'Sáb 12 sep', t:'Short',    title:'Tu Arrepentimiento',       alb:'Llegaste muy tarde',      g:'Bachata' },
+  ]},
+  { w:6, d:'13–19 sep 2026', entries:[
+    { date:'Dom 13 sep', t:'Completa', title:'Esta Es la Última Llamada',alb:'Llegaste muy tarde',      g:'Bachata',           fix:'título corregido' },
+    { date:'Mar 15 sep', t:'Completa', title:'Cada Paso Cuenta',         alb:'Vuelvo a sentir la vida', g:'Salsa' },
+    { date:'Jue 17 sep', t:'Short',    title:'La Luz de la Ventana',     alb:'Las pequeñas cosas',      g:'Indie Folk' },
+    { date:'Vie 18 sep', t:'Short',    title:'Contigo Entendí',          alb:'Desde que llegaste',      g:'Regional romántico' },
+    { date:'Sáb 19 sep', t:'Short',    title:'Sin Pedir Permiso',        alb:'Ya no vuelvo atrás',      g:'Dancehall' },
+  ]},
+  { w:7, d:'20–26 sep 2026', entries:[
+    { date:'Dom 20 sep', t:'Completa', title:'Un Día Cualquiera',        alb:'Las pequeñas cosas',      g:'Indie Folk' },
+    { date:'Mar 22 sep', t:'Completa', title:'Eres Mi Calma',            alb:'Desde que llegaste',      g:'Regional romántico' },
+    { date:'Jue 24 sep', t:'Short',    title:'Ya Salió el Sol',          alb:'Vuelvo a sentir la vida', g:'Salsa' },
+    { date:'Vie 25 sep', t:'Short',    title:'Ahora Sí Soy Yo',          alb:'Volví a escucharme',      g:'Pop Soul' },
+    { date:'Sáb 26 sep', t:'Short',    title:'Qué Te Vaya Bonito',       alb:'Llegaste muy tarde',      g:'Bachata' },
+  ]},
+  { w:8, d:'27 sep – 3 oct 2026', n:'📊 Revisión Analytics mes 1', entries:[
+    { date:'Dom 27 sep', t:'Completa', title:'ADAPTATIVO',               alb:'Género ganador mes 1',    g:'TBD',               adaptive:true, note:'Mayor retención + nuevos suscriptores' },
+    { date:'Mar 29 sep', t:'Completa', title:'La Vida Me Encontró',      alb:'Vuelvo a sentir la vida', g:'Salsa' },
+    { date:'Jue 1 oct',  t:'Short',    title:'Libre de Ti',              alb:'Ya no vuelvo atrás',      g:'Dancehall' },
+    { date:'Vie 2 oct',  t:'Short',    title:'Sin Miedo a Sonreír',      alb:'Vuelvo a sentir la vida', g:'Salsa',             fix:'reemplaza título inválido' },
+    { date:'Sáb 3 oct',  t:'Short',    title:'ADAPTATIVO',               alb:'Canción premiada',        g:'TBD',               adaptive:true, note:'Mejor CTR en Shorts del mes 1' },
+  ]},
+  { w:9, d:'4–10 oct 2026', n:'📊 Slot adaptativo', entries:[
+    { date:'Dom 4 oct',  t:'Completa', title:'Más Fuerte que Ayer',      alb:'Ya no vuelvo atrás',      g:'Dancehall' },
+    { date:'Mar 6 oct',  t:'Completa', title:'ADAPTATIVO',               alb:'Género ganador',          g:'TBD',               adaptive:true },
+    { date:'Jue 8 oct',  t:'Short',    title:'Me Aprendí Sin Ti',        alb:'Llegaste muy tarde',      g:'Bachata',           fix:'reemplaza título inválido' },
+    { date:'Vie 9 oct',  t:'Short',    title:'Mi Lugar Favorito',        alb:'Desde que llegaste',      g:'Regional romántico' },
+    { date:'Sáb 10 oct', t:'Short',    title:'Aunque Tenga Miedo',       alb:'Hoy Empieza Algo Bueno',  g:'Cumbia argentina' },
+  ]},
+  { w:10, d:'11–17 oct 2026', n:'📊 Slot adaptativo', entries:[
+    { date:'Dom 11 oct', t:'Completa', title:'Nunca Fue Demasiado Tarde',alb:'Volví a escucharme',      g:'Pop Soul' },
+    { date:'Mar 13 oct', t:'Completa', title:'ADAPTATIVO',               alb:'Género ganador',          g:'TBD',               adaptive:true },
+    { date:'Jue 15 oct', t:'Short',    title:'Esta Soy Yo',              alb:'Ya no vuelvo atrás',      g:'Dancehall' },
+    { date:'Vie 16 oct', t:'Short',    title:'Despacio',                 alb:'Las pequeñas cosas',      g:'Indie Folk' },
+    { date:'Sáb 17 oct', t:'Short',    title:'Después de Ti',            alb:'Desde que llegaste',      g:'Regional romántico' },
+  ]},
+  { w:11, d:'18–24 oct 2026', n:'📊 Slot adaptativo', entries:[
+    { date:'Dom 18 oct', t:'Completa', title:'Toda la Vida',             alb:'Desde que llegaste',      g:'Regional romántico' },
+    { date:'Mar 20 oct', t:'Completa', title:'ADAPTATIVO',               alb:'Género ganador',          g:'TBD',               adaptive:true },
+    { date:'Jue 22 oct', t:'Short',    title:'No Me Apagues',            alb:'Ya no vuelvo atrás',      g:'Dancehall' },
+    { date:'Vie 23 oct', t:'Short',    title:'Siempre Sale el Sol',       alb:'Hoy Empieza Algo Bueno',  g:'Cumbia argentina' },
+    { date:'Sáb 24 oct', t:'Short',    title:'Después de la Lluvia',     alb:'Las pequeñas cosas',      g:'Indie Folk' },
+  ]},
+  { w:12, d:'25–31 oct 2026', n:'🏁 Cierre primer ciclo', entries:[
+    { date:'Dom 25 oct', t:'Completa', title:'¡Que Nadie Me Pare!',      alb:'Vuelvo a sentir la vida', g:'Salsa' },
+    { date:'Mar 27 oct', t:'Completa', title:'ADAPTATIVO',               alb:'Género ganador',          g:'TBD',               adaptive:true },
+    { date:'Jue 29 oct', t:'Short',    title:'La Calma También Canta',   alb:'Las pequeñas cosas',      g:'Indie Folk' },
+    { date:'Vie 30 oct', t:'Short',    title:'Después del Miedo',        alb:'Volví a escucharme',      g:'Pop Soul' },
+    { date:'Sáb 31 oct', t:'Short',    title:'Tú Ya No Decides',         alb:'Ya no vuelvo atrás',      g:'Dancehall' },
+  ]},
+];
+
+const cal = document.getElementById('calendar');
+weeks.forEach(w => {
+  const div = document.createElement('div');
+  div.className = 'week';
+  div.innerHTML = `
+    <div class="week-header">
+      <span class="week-num">Sem ${w.w}</span>
+      <span class="week-dates">${w.d}</span>
+      ${w.n ? `<span class="week-note">${w.n}</span>` : ''}
+    </div>
+    <div class="entries">
+      ${w.entries.map(e => {
+        const cls = e.adaptive ? 'adaptativo' : e.pending ? 'pending' : e.t.toLowerCase();
+        const bg = G[e.g] || '#E5E7EB';
+        const typeCls = e.adaptive ? 'adaptativo' : e.pending ? 'pending' : e.t.toLowerCase();
+        const typeLabel = e.adaptive ? '📊 ADAPTATIVO' : e.t === 'Completa' ? '▶ Completa' : '⚡ Short';
+        const titleCls = e.adaptive ? 'adaptive-title' : e.pending ? 'pending-title' : '';
+        return `<div class="entry ${cls}">
+          <span class="entry-date">${e.date}</span>
+          <span class="type-badge type-${typeCls}">${typeLabel}</span>
+          <span class="entry-title ${titleCls}">${e.title}</span>
+          <span class="genre-chip" style="background:${bg}">${e.g}</span>
+          ${e.fix ? `<span class="correction-badge">✔ ${e.fix}</span>` : ''}
+          ${e.note && !e.fix ? `<span style="font-size:0.65rem;color:#9CA3AF;font-style:italic">${e.note}</span>` : ''}
+        </div>`;
+      }).join('')}
+    </div>`;
+  cal.appendChild(div);
+});
+</script>
