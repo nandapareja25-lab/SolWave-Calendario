@@ -27,6 +27,8 @@ const GENRE_COLORS: Record<string, string> = {
   'Balada':     '#DDD6FE',
   'Regional':   '#FCA5A5',
   'Cumbia':     '#FCD34D',
+  'Banda':      '#FB923C',
+  'Gospel':     '#E879F9',
 }
 
 function doneKey(date: string, slot: SlotKey) { return `${date}|${slot}` }
