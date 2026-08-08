@@ -249,7 +249,7 @@ export default function HoyClient({
           </h3>
           <div
             className="rounded-2xl overflow-hidden divide-y"
-            style={{ background: 'white', boxShadow: '0 1px 6px rgba(0,0,0,0.05)', divideColor: '#F3F4F6' }}
+            style={{ background: 'white', boxShadow: '0 1px 6px rgba(0,0,0,0.05)' }}
           >
             {upcomingDays.map(day => {
               const dayDone = SLOT_KEYS.filter(sk => done.has(doneKey(day.date, sk))).length
