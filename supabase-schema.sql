@@ -62,3 +62,13 @@ alter table albums disable row level security;
 alter table songs disable row level security;
 alter table checklist_steps disable row level security;
 alter table app_settings disable row level security;
+
+-- YouTube calendar publication tracking
+create table if not exists yt_published (
+  entry_date date not null,
+  title text not null,
+  published_at timestamptz not null default now(),
+  primary key (entry_date, title)
+);
+
+alter table yt_published disable row level security;
